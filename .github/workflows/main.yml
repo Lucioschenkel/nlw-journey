@@ -25,3 +25,9 @@ jobs:
 
       - name: Build docker image
         run: docker build -t lucioschenkel/nlw.journey.api:${{ steps.generate-tag.outputs.tag }} .
+
+      - name: Push image
+        run: |
+          docker push lucioschenkel/nlw.journey.api:${{ steps.generate-tag.outputs.tag }}
+          docker tag lucioschenkel/nlw.journey.api:${{ steps.generate-tag.outputs.tag }} lucioschenkel/nlw.journey.api:latest
+          docker push lucioschenkel/nlw.journey.api:latest
